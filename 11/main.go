@@ -21,17 +21,18 @@ func simpleIntersection(set1, set2 []int) []int {
 
 // hashIntersection - функция для поиска пересечения двух множеств с использованием хэш-таблицы
 func hashIntersection(set1, set2 []int) []int {
-	setMap := make(map[int]bool) // Создаем хэш-таблицу для быстрого поиска элементов из первого множества
+	setMap := make(map[int]struct{}) // Создаем хэш-таблицу для быстрого поиска элементов из первого множества
 	result := []int{}
 
 	// Заполняем хэш-таблицу элементами из первого множества
 	for _, num := range set1 {
-		setMap[num] = true
+		setMap[num] = struct{}{}
 	}
 
 	// Проверяем каждый элемент из второго множества на наличие в хэш-таблице
 	for _, num := range set2 {
-		if setMap[num] {
+		_, ok := setMap[num]
+		if ok {
 			result = append(result, num) // Если элемент присутствует в хэш-таблице, добавляем его в результат
 		}
 	}
